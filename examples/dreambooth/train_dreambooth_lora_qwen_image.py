@@ -93,7 +93,7 @@ if is_wandb_available():
     import wandb
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
-check_min_version("0.36.0.dev0")
+check_min_version("0.37.0.dev0")
 
 logger = get_logger(__name__)
 
@@ -1338,7 +1338,7 @@ def main(args):
                         batch["pixel_values"] = batch["pixel_values"].to(
                             accelerator.device, non_blocking=True, dtype=vae.dtype
                         )
-                    latents_cache.append(vae.encode(batch["pixel_values"]).latent_dist)
+                        latents_cache.append(vae.encode(batch["pixel_values"]).latent_dist)
                 if train_dataset.custom_instance_prompts:
                     with offload_models(text_encoding_pipeline, device=accelerator.device, offload=args.offload):
                         prompt_embeds, prompt_embeds_mask = compute_text_embeddings(
