@@ -764,9 +764,10 @@ class Flux2KleinPipeline(DiffusionPipeline, Flux2LoraLoaderMixin):
             condition_images = []
             for img in image:
                 image_width, image_height = img.size
-                if image_width * image_height > 1024 * 1024:
-                    img = self.image_processor._resize_to_target_area(img, 1024 * 1024)
-                    image_width, image_height = img.size
+                # Disable to allow for 2K conditioning
+                # if image_width * image_height > 1024 * 1024:
+                #     img = self.image_processor._resize_to_target_area(img, 1024 * 1024)
+                #     image_width, image_height = img.size
 
                 multiple_of = self.vae_scale_factor * 2
                 image_width = (image_width // multiple_of) * multiple_of
